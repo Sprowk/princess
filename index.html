@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>The Royal Date Bureau 👑</title>
+<meta name="description" content="An extremely official, absolutely serious portal for booking a date with the Princess. Suitors must queue." />
+<meta name="theme-color" content="#ffd7e8" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Bungee&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ===== global svg defs: filters + reusable shapes ===== -->
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="wobble">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="3" seed="7" result="n">
+        <animate attributeName="baseFrequency" dur="14s" values="0.014;0.021;0.014" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe6f3"/><stop offset="100%" stop-color="#e8dcff"/>
+    </linearGradient>
+    <symbol id="i-heart" viewBox="0 0 32 30">
+      <path d="M16 29S1 19.5 1 10.2A8.7 8.7 0 0 1 16 4.6 8.7 8.7 0 0 1 31 10.2C31 19.5 16 29 16 29Z"
+            fill="currentColor" stroke="#1b1033" stroke-width="2.4" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-crown" viewBox="0 0 48 36">
+      <path d="M4 30 6 8l10 8 8-13 8 13 10-8 2 22Z" fill="currentColor" stroke="#1b1033" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="4" y="29" width="40" height="5" rx="2.5" fill="currentColor" stroke="#1b1033" stroke-width="3"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path d="M12 1.5 15 9l7.5.5-5.8 4.9 1.9 7.3L12 17.6 5.4 21.7l1.9-7.3L1.5 9.5 9 9Z"
+            fill="currentColor" stroke="#1b1033" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24">
+      <path d="M12 0c1 7 4 10 12 12-8 2-11 5-12 12-1-7-4-10-12-12C8 10 11 7 12 0Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===== animated background ===== -->
+<div class="bg" aria-hidden="true">
+  <svg class="bg-castle" viewBox="0 0 1200 380" preserveAspectRatio="xMidYMax meet">
+    <g filter="url(#wobble)">
+      <path d="M0 380V250l60-30 40 30v-40l50-28 50 28v40l70-46 70 46V180l90-52 90 52v70l60-34 60 34v-70l90-52 90 52v70l60-30 60 30v-30l70-40 70 40v130Z"
+            fill="#c9b8ff" opacity=".55"/>
+    </g>
+    <g class="bg-towers">
+      <path d="M420 380V150l70-46 70 46v230Z" fill="#f6b3d8" stroke="#1b1033" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M420 150h140l-70-58Z" fill="#ff5fa2" stroke="#1b1033" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M700 380V190l60-40 60 40v190Z" fill="#bff0e2" stroke="#1b1033" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M700 190h120l-60-52Z" fill="#5fe3c0" stroke="#1b1033" stroke-width="5" stroke-linejoin="round"/>
+      <rect x="470" y="210" width="40" height="60" rx="20" fill="#fff6ec" stroke="#1b1033" stroke-width="5"/>
+      <rect x="740" y="240" width="40" height="60" rx="20" fill="#fff6ec" stroke="#1b1033" stroke-width="5"/>
+    </g>
+  </svg>
+  <div class="bg-floaters" id="floaters"></div>
+</div>
+
+<!-- ===== header ===== -->
+<header class="topbar">
+  <a class="brand" href="#/" aria-label="Royal Date Bureau home">
+    <svg class="brand-crown" viewBox="0 0 48 36" aria-hidden="true"><use href="#i-crown" style="color:#ffd23f"/></svg>
+    <span class="brand-text">Royal Date<br><em>Bureau</em></span>
+  </a>
+  <div class="live-pill" title="Definitely real live data">
+    <span class="live-dot"></span> LIVE
+  </div>
+</header>
+
+<main id="app" class="app" tabindex="-1"><!-- screens render here --></main>
+
+<footer class="footer">
+  <p>Handmade with 💗, zero servers, and questionable royal authority.</p>
+  <p class="tiny">All suitor statistics are dramatised. No suitors were harmed. (Some were ghosted.)</p>
+</footer>
+
+<div id="toasts" class="toasts" aria-live="polite" aria-atomic="false"></div>
+<div id="confetti" class="confetti-layer" aria-hidden="true"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
