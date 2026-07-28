@@ -109,8 +109,6 @@ body{
   padding:clamp(16px,4vw,26px);
   margin-bottom:18px;
 }
-.card.tilt-l{transform:rotate(-.7deg)}
-.card.tilt-r{transform:rotate(.7deg)}
 .card.cream{background:var(--cream)}
 .card.blush{background:var(--blush)}
 .card.mint{background:#dffaf2}
@@ -163,13 +161,13 @@ p{margin:0 0 12px;line-height:1.5}
 .btn-row.center{justify-content:center}
 
 .wiggle{animation:wiggle 2.4s ease-in-out infinite}
-@keyframes wiggle{0%,88%,100%{transform:rotate(0)}91%{transform:rotate(-3deg)}94%{transform:rotate(3deg)}97%{transform:rotate(-2deg)}}
+@keyframes wiggle{0%,86%,100%{transform:translateY(0) scale(1)}91%{transform:translateY(-4px) scale(1.03)}96%{transform:translateY(0) scale(1)}}
 
 /* ---------- home / mode picker ---------- */
 .hero{text-align:center;padding:6px 0 4px}
 .hero .kicker{
   display:inline-block;font-family:var(--font-display);font-size:12px;letter-spacing:1.5px;
-  background:var(--ink);color:var(--sun);padding:6px 14px;border-radius:999px;transform:rotate(-2deg);margin-bottom:12px;
+  background:var(--ink);color:var(--sun);padding:6px 14px;border-radius:999px;margin-bottom:12px;
 }
 .hero h1{margin-bottom:8px}
 .hero-sub{font-size:clamp(15px,3.6vw,19px);max-width:38ch;margin:0 auto 6px}
@@ -190,7 +188,7 @@ p{margin:0 0 12px;line-height:1.5}
   transition:transform .16s cubic-bezier(.2,1.4,.4,1), box-shadow .16s;
   font-family:inherit;color:inherit;font-size:inherit;overflow:hidden;
 }
-.mode:hover{transform:translate(-3px,-4px) rotate(-.6deg);box-shadow:var(--pop-lg)}
+.mode:hover{transform:translate(-3px,-4px);box-shadow:var(--pop-lg)}
 .mode:active{transform:translate(2px,2px);box-shadow:var(--pop-sm)}
 .mode:focus-visible{outline:4px dashed var(--lilac);outline-offset:4px}
 .mode.princess{background:linear-gradient(160deg,#ffe4f2,#ffd0e7)}
@@ -198,11 +196,6 @@ p{margin:0 0 12px;line-height:1.5}
 .mode h3{font-family:var(--font-display);font-size:clamp(19px,4.6vw,25px);margin-bottom:6px}
 .mode p{font-size:14px;margin-bottom:0}
 .mode-avatar{width:96px;height:96px;display:block;margin:0 auto 6px}
-.mode-tag{
-  position:absolute;top:24px;right:-54px;width:180px;transform:rotate(40deg);
-  background:var(--ink);color:var(--sun);font-family:var(--font-display);font-size:10px;
-  padding:5px 0;letter-spacing:1.5px;text-align:center;
-}
 
 /* ---------- reel (SuitorTok) ---------- */
 .reel-wrap{position:relative}
@@ -237,11 +230,11 @@ p{margin:0 0 12px;line-height:1.5}
   position:absolute;right:8px;bottom:10px;
   font-family:var(--font-display);font-size:clamp(15px,4.6vw,26px);
   color:#e8143c;border:5px solid #e8143c;border-radius:10px;padding:4px 12px;
-  transform:rotate(-14deg);opacity:.9;letter-spacing:1px;
+  opacity:.9;letter-spacing:1px;
   animation:stamp-in .5s cubic-bezier(.2,1.8,.4,1) .35s both;
   background:rgba(255,255,255,.55);
 }
-@keyframes stamp-in{from{transform:rotate(-14deg) scale(2.6);opacity:0}to{transform:rotate(-14deg) scale(1);opacity:.9}}
+@keyframes stamp-in{from{transform:scale(2.6);opacity:0}to{transform:scale(1);opacity:.9}}
 .stamp.green{color:#0a9d5a;border-color:#0a9d5a}
 
 /* ---------- stats ---------- */
@@ -325,11 +318,11 @@ p{margin:0 0 12px;line-height:1.5}
 .day.free{background:var(--mint);animation:day-breathe 2.6s ease-in-out infinite}
 .day.free .dot-row{position:absolute;bottom:5px;display:flex;gap:3px}
 @keyframes day-breathe{0%,100%{transform:none}50%{transform:translateY(-3px)}}
-.day.picked{background:var(--hot);color:#fff;transform:rotate(-3deg)}
+.day.picked{background:var(--hot);color:#fff}
 .day.picked .tick{position:absolute;top:-9px;right:-7px;width:24px;height:24px}
 .day.locked{background:#f2edf7;color:#b0a8c4;cursor:not-allowed}
-.day.locked .bar{position:absolute;left:8%;right:8%;height:3px;background:#e8143c;opacity:.5;transform:rotate(-30deg);border-radius:2px}
-.day.chosen{background:var(--sun);transform:rotate(2deg) scale(1.06);box-shadow:5px 5px 0 var(--ink)}
+.day.locked .bar{position:absolute;left:14%;right:14%;height:2px;background:#e8143c;opacity:.25;transform:rotate(-30deg);border-radius:2px}
+.day.chosen{background:var(--sun);transform:scale(1.06);box-shadow:5px 5px 0 var(--ink)}
 .day .mini{position:absolute;top:2px;right:4px;font-size:9px}
 
 .cal-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;font-size:12px;align-items:center}
@@ -434,7 +427,7 @@ input:focus,textarea:focus,select:focus{outline:4px dashed var(--lilac);outline-
 .row-between{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .badge{
   display:inline-block;background:var(--ink);color:var(--sun);font-family:var(--font-display);
-  font-size:11px;padding:5px 11px;border-radius:999px;transform:rotate(-2deg);
+  font-size:11px;padding:5px 11px;border-radius:999px;
 }
 .hr{height:4px;background:repeating-linear-gradient(90deg,var(--ink) 0 12px,transparent 12px 22px);border-radius:2px;margin:18px 0;opacity:.45}
 .speech{

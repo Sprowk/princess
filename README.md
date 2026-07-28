@@ -1,7 +1,7 @@
-# 👑 The Royal Date Bureau
+# The Royal Date Bureau
 
 A ridiculous, hand-drawn, **fully serverless** date-booking kingdom for one princess and one
-extremely hopeful suitor. Static HTML/CSS/JS — no backend, no database, no build step.
+extremely hopeful suitor. Static HTML/CSS/JS — no backend, no build step.
 
 ## How two people share data without a server
 
@@ -47,6 +47,8 @@ python3 -m http.server 8000   # then open http://localhost:8000
 | `index.html` | Page shell, SVG symbol defs, animated castle background |
 | `styles.css` | The whole cartoon design system — thick outlines, offset shadows, responsive layout |
 | `app.js` | Hash router, hand-built calendar, queue animation, reel, link encoding |
+| `og-image.svg` | Hand-drawn social preview card (the editable source) |
+| `og-image.png` | The same card rasterised at 1200×630 — what Instagram/WhatsApp/iMessage actually show |
 | `.nojekyll` | Tells GitHub Pages to serve the files as-is |
 
 ## Everything is handmade

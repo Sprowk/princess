@@ -143,11 +143,11 @@ async function copyText(text) {
    3. content: slots, plans, rules, rivals, quiz
    --------------------------------------------------------- */
 const SLOTS = [
-  { t: '11:00', label: '🥞 Brunch Ambush' },
-  { t: '15:00', label: '🫖 Afternoon Tea' },
-  { t: '18:00', label: '🌅 Sunset Stroll' },
-  { t: '19:30', label: '🍝 Dinner Quest' },
-  { t: '21:30', label: '🌙 Moonlight Mischief' }
+  { t: '11:00', label: 'Brunch Ambush' },
+  { t: '15:00', label: 'Afternoon Tea' },
+  { t: '18:00', label: 'Sunset Stroll' },
+  { t: '19:30', label: 'Dinner Quest' },
+  { t: '21:30', label: 'Moonlight Mischief' }
 ];
 
 const PLANS = [
@@ -162,15 +162,15 @@ const PLANS = [
 ];
 
 const RULES = [
-  'Snacks are mandatory 🍿',
-  'Zero (0) work talk 💼',
-  'Minimum three compliments ✨',
-  'He carries the bag 👜',
-  'Phone stays in the pocket 📵',
-  'Must end in dessert 🍰',
-  'Doors get opened 🚪',
-  'Playlist pre-approved 🎧',
-  'One (1) photo of me, taken well 📸'
+  'Snacks are mandatory',
+  'Zero (0) work talk',
+  'Minimum three compliments',
+  'He carries the bag',
+  'Phone stays in the pocket',
+  'Must end in dessert',
+  'Doors get opened',
+  'Playlist pre-approved',
+  'One (1) photo of me, taken well'
 ];
 
 const RIVALS = [
@@ -190,7 +190,7 @@ const RIVALS = [
   { n: 'Lord Fantasy Football',       h: '@my_team_my_life',  q: 'I can do Saturday, but only between 14:00 and 14:06.', likes: 2 }
 ];
 
-const STAMPS = ['REJECTED', 'GHOSTED', 'LEFT ON READ', 'DENIED', 'BLOCKED', 'LOL NO', 'SEEN 👀', 'ARCHIVED'];
+const STAMPS = ['REJECTED', 'GHOSTED', 'LEFT ON READ', 'DENIED', 'BLOCKED', 'LOL NO', 'SEEN', 'ARCHIVED'];
 
 const QUIZ = [
   {
@@ -205,7 +205,7 @@ const QUIZ = [
   {
     q: 'How many photos of her do you take before one is approved?',
     opts: [
-      { t: 'As many as it takes 📸', s: 30, r: 'The kingdom respects this stamina.' },
+      { t: 'As many as it takes', s: 30, r: 'The kingdom respects this stamina.' },
       { t: 'Around 40. I have a system.', s: 25, r: 'A professional.' },
       { t: 'One. It was blurry. I sent it anyway.', s: 2, r: 'Straight to the dungeon.' },
       { t: 'I hand her the phone and flee', s: 15, r: 'Cowardly, yet efficient.' }
@@ -226,7 +226,7 @@ const QUIZ = [
       { t: 'A hoodie she will steal forever', s: 30, r: 'Sacrificial. Noble. Gone forever.' },
       { t: 'A power bank at 100%', s: 24, r: 'Practical royalty.' },
       { t: 'A backup plan for when plan A dies', s: 22, r: 'Strategic mind.' },
-      { t: 'Vibes only 😎', s: 8, r: 'The guards are laughing at you.' }
+      { t: 'Vibes only', s: 8, r: 'The guards are laughing at you.' }
     ]
   }
 ];
@@ -426,9 +426,9 @@ function mountReel(container, { duration = 4200, count = 7, startAt = 0 } = {}) 
           <div class="reel-handle">${esc(rv.h)}</div>
           <div class="reel-quote">“${esc(rv.q)}”</div>
           <div class="reel-meta">
-            <span>❤️ ${rv.likes}</span>
-            <span>👀 ${views}</span>
-            <span>⏳ waiting ${1 + (picks[i] % 9)}yr</span>
+            <span>${rv.likes} hearts</span>
+            <span>${views} views</span>
+            <span>waiting ${1 + (picks[i] % 9)}yr</span>
           </div>
         </div>
       </div>
@@ -481,7 +481,7 @@ function shareUrl(path) {
 function shareRow(url, id) {
   return `<div class="share-box">
     <input type="text" id="${id}" value="${esc(url)}" readonly onclick="this.select()" aria-label="Shareable link" />
-    <button type="button" class="btn pink" data-copy="${id}">📋 Copy link</button>
+    <button type="button" class="btn pink" data-copy="${id}">Copy link</button>
   </div>`;
 }
 function bindCopy(root) {
@@ -489,8 +489,8 @@ function bindCopy(root) {
     btn.addEventListener('click', async () => {
       const input = $('#' + btn.dataset.copy, root);
       const ok = await copyText(input.value);
-      toast(ok ? '📋 Copied! Now go paste it at him.' : '😖 Copy failed — select it and copy manually.');
-      if (ok) { btn.textContent = '✅ Copied!'; setTimeout(() => { btn.textContent = '📋 Copy link'; }, 1800); }
+      toast(ok ? 'Copied. Now go paste it at him.' : 'Copy failed — select the link and copy it manually.');
+      if (ok) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = 'Copy link'; }, 1800); }
     });
   });
 }
@@ -507,15 +507,14 @@ function screenHome() {
       <p class="hero-sub">The only officially unofficial portal where suitors queue,
       grovel, and occasionally get a date. Applications close when she gets bored.</p>
       <div class="ticker">
-        <span>🚨 <b id="tk1">…</b> suitors queuing right now</span>
+        <span><b id="tk1">…</b> suitors queuing right now</span>
         <span>·</span>
-        <span>💔 <b id="tk2">…</b> rejected today</span>
+        <span><b id="tk2">…</b> rejected today</span>
       </div>
     </section>
 
     <div class="modes mt">
       <button type="button" class="mode princess" data-goto="/princess">
-        <span class="mode-tag">HER MAJESTY</span>
         <svg class="mode-avatar" viewBox="0 0 100 100" aria-hidden="true">
           <g><use href="#i-crown" x="26" y="4" width="48" height="36" style="color:#ffd23f"/></g>
           <rect x="28" y="38" width="44" height="50" rx="22" fill="#ffd9b8" stroke="#1b1033" stroke-width="4"/>
@@ -525,27 +524,26 @@ function screenHome() {
           <circle cx="34" cy="70" r="4.5" fill="#ff5fa2" opacity=".5"/>
           <circle cx="66" cy="70" r="4.5" fill="#ff5fa2" opacity=".5"/>
         </svg>
-        <h3>👑 Princess Mode</h3>
+        <h3>Princess Mode</h3>
         <p>Open the royal calendar, decide which days are worthy, set your demands, then hand out a link. Absolute power. Zero effort.</p>
       </button>
 
       <button type="button" class="mode suitor" data-goto="${saved ? '/book/' + packState(saved) : '/queue'}">
-        <span class="mode-tag">HOPEFUL</span>
         <svg class="mode-avatar" viewBox="0 0 100 118" aria-hidden="true">${svgFace(4).replace('<svg class="reel-face" viewBox="0 0 100 118" role="img" aria-label="A hopeful cartoon suitor">', '').replace('</svg>', '')}</svg>
-        <h3>🤵 Suitor Mode</h3>
+        <h3>Suitor Mode</h3>
         <p>Join the queue behind several thousand desperate men, pass the vibe check, and beg for a slot. Good luck, champ.</p>
       </button>
     </div>
 
-    <div class="card cream tilt-r mt">
-      <h2>📜 How this ancient magic works</h2>
+    <div class="card cream mt">
+      <h2>How this ancient magic works</h2>
       <ol style="padding-left:20px;line-height:1.7">
         <li><b>She</b> picks her free days → gets a <b>Royal Decree link</b>.</li>
         <li><b>She</b> sends that link to <b>him</b> (text, whatever).</li>
         <li><b>He</b> queues, suffers, books a slot → gets a <b>Receipt link</b>.</li>
-        <li><b>He</b> sends it back. Date confirmed. Kingdom rejoices. 🎉</li>
+        <li><b>He</b> sends it back. Date confirmed. Kingdom rejoices.</li>
       </ol>
-      <p class="muted">No servers, no accounts, no database. The whole date lives inside the link.</p>
+      <p class="muted">No servers, no accounts, no sign-ups. The whole date lives inside the link.</p>
     </div>`);
 
   $$('[data-goto]', root).forEach((b) => b.addEventListener('click', () => go(b.dataset.goto)));
@@ -568,9 +566,9 @@ function screenPrincess() {
   if (!decree.d) decree.d = {};
 
   const root = render(`
-    <div class="card blush tilt-l">
+    <div class="card blush">
       <span class="badge">STEP 1 · IDENTIFY YOURSELF</span>
-      <h1 style="font-size:clamp(24px,6.5vw,40px)">👑 Princess Mode</h1>
+      <h1 style="font-size:clamp(24px,6.5vw,40px)">Princess Mode</h1>
       <p>Welcome, Your Majesty. Tap the days you would <em>consider</em> tolerating his presence.
       Everything else stays locked behind the royal guards.</p>
       <label class="fld"><span>Your royal name</span>
@@ -580,25 +578,25 @@ function screenPrincess() {
 
     <div class="card">
       <span class="badge">STEP 2 · THE ROYAL CALENDAR</span>
-      <h2>🗓️ Which days are worthy?</h2>
+      <h2>Which days are worthy?</h2>
       <p class="muted">Tap a day to open it. Tap again to slam it shut. Past days are already dead to us.</p>
       <div id="calMount"></div>
       <div class="btn-row mt">
-        <button type="button" class="btn mint" id="allWeekends">✨ All weekends this month</button>
-        <button type="button" class="btn ghost" id="clearAll">🧹 Clear everything</button>
+        <button type="button" class="btn mint" id="allWeekends">All weekends this month</button>
+        <button type="button" class="btn ghost" id="clearAll">Clear everything</button>
       </div>
     </div>
 
-    <div class="card sun tilt-r">
+    <div class="card sun">
       <span class="badge">STEP 3 · TIME SLOTS</span>
-      <h2>⏰ When, exactly?</h2>
+      <h2>When, exactly?</h2>
       <p class="muted">Each open day gets its own slots. He may only choose from these. Cruelty is encouraged.</p>
       <div id="slotList"></div>
     </div>
 
     <div class="card mint">
       <span class="badge">STEP 4 · YOUR DEMANDS</span>
-      <h2>📜 Non-negotiable terms</h2>
+      <h2>Non-negotiable terms</h2>
       <div class="chips" id="ruleChips">
         ${RULES.map((r, i) => `<button type="button" class="chip ${decree.r.includes(i) ? 'on' : ''}" data-rule="${i}">${esc(r)}</button>`).join('')}
       </div>
@@ -609,16 +607,16 @@ function screenPrincess() {
 
     <div class="card cream center">
       <span class="badge">STEP 5 · ISSUE THE DECREE</span>
-      <h2>💌 Send him the link</h2>
+      <h2>Send him the link</h2>
       <p class="muted">This generates a link containing your availability. Send it to him. Then wait, powerfully.</p>
-      <button type="button" class="btn pink big wiggle" id="makeLink">👑 Issue the Royal Decree</button>
+      <button type="button" class="btn pink big wiggle" id="makeLink">Issue the Royal Decree</button>
       <div id="linkOut" class="mt"></div>
       <div class="hr"></div>
-      <h3>📬 Already got his application?</h3>
+      <h3>Already got his application?</h3>
       <p class="muted">Paste the receipt link he sent back to open it.</p>
       <div class="share-box">
         <input type="text" id="inboxUrl" placeholder="paste his link here…" />
-        <button type="button" class="btn lilac" id="openInbox">Open it 👀</button>
+        <button type="button" class="btn lilac" id="openInbox">Open it</button>
       </div>
     </div>
 
@@ -645,7 +643,7 @@ function screenPrincess() {
     const box = $('#slotList', root);
     const days = Object.keys(decree.d).sort();
     if (!days.length) {
-      box.innerHTML = `<p class="muted center" style="padding:14px 0">No days open yet. The kingdom is closed. 🚪</p>`;
+      box.innerHTML = `<p class="muted center" style="padding:14px 0">No days open yet. The kingdom is closed.</p>`;
       return;
     }
     box.innerHTML = days.map((key) => `
@@ -675,7 +673,7 @@ function screenPrincess() {
     const list = decree.d[key];
     const at = list.indexOf(i);
     if (at >= 0) {
-      if (list.length === 1) { toast('👑 A day needs at least one slot, Majesty.'); return; }
+      if (list.length === 1) { toast('A day needs at least one slot, Majesty.'); return; }
       list.splice(at, 1);
     } else {
       list.push(i); list.sort((a, b) => a - b);
@@ -697,13 +695,13 @@ function screenPrincess() {
       if (dw === 0 || dw === 6) { decree.d[ymd(date)] = decree.d[ymd(date)] || [2, 3]; n++; }
     }
     cal.redraw(); drawSlots(); save();
-    toast(n ? `✨ ${n} weekend days unlocked. Generous.` : 'No weekends left this month, sorry!');
+    toast(n ? `${n} weekend days unlocked. Generous.` : 'No weekends left this month, sorry!');
   });
 
   $('#clearAll', root).addEventListener('click', () => {
     decree.d = {};
     cal.redraw(); drawSlots(); save();
-    toast('🧹 The kingdom is closed. Iconic.');
+    toast('The kingdom is closed. Iconic.');
   });
 
   /* --- rules --- */
@@ -726,7 +724,7 @@ function screenPrincess() {
   /* --- generate link --- */
   $('#makeLink', root).addEventListener('click', () => {
     const days = Object.keys(decree.d);
-    if (!days.length) { toast('👑 Open at least one day first, Majesty!'); return; }
+    if (!days.length) { toast('Open at least one day first, Majesty!'); return; }
     if (!decree.n) decree.n = 'The Princess';
     save();
     const url = shareUrl('/book/' + packState(decree));
@@ -736,19 +734,19 @@ function screenPrincess() {
       ${decree.r.length} demand${decree.r.length === 1 ? '' : 's'} attached. Send this to him:</div>
       ${shareRow(url, 'decreeUrl')}
       <div class="btn-row center mt">
-        <a class="btn sky" href="${esc(url)}" target="_blank" rel="noopener">👀 Preview his side</a>
-        <a class="btn mint" href="${esc('sms:?&body=' + encodeURIComponent('Your application portal is open, peasant: ' + url))}">💬 Text it</a>
+        <a class="btn sky" href="${esc(url)}" target="_blank" rel="noopener">Preview his side</a>
+        <a class="btn mint" href="${esc('sms:?&body=' + encodeURIComponent('Your application portal is open, peasant: ' + url))}">Text it</a>
       </div>`;
     bindCopy(out);
     confetti(60);
-    toast('👑 Royal Decree issued!');
+    toast('Royal Decree issued!');
   });
 
   /* --- inbox --- */
   $('#openInbox', root).addEventListener('click', () => {
     const raw = $('#inboxUrl', root).value.trim();
     const at = raw.indexOf('#/booked/');
-    if (at < 0) { toast('🤨 That doesn\'t look like his receipt link.'); return; }
+    if (at < 0) { toast('That doesn\'t look like his receipt link.'); return; }
     location.hash = raw.slice(at + 1);
   });
 
@@ -777,9 +775,9 @@ function screenQueue(payload) {
   const start = kingdomStats().inQueue;
 
   const root = render(`
-    <div class="card blush tilt-l center queue-box">
+    <div class="card blush center queue-box">
       <span class="badge">ROYAL WAITING ROOM</span>
-      <h1 style="font-size:clamp(22px,6vw,38px)">🤵 You are in the queue</h1>
+      <h1 style="font-size:clamp(22px,6vw,38px)">You are in the queue</h1>
       <p class="muted">Applications for <b>${esc(her)}</b> are currently... competitive.</p>
       <span class="queue-num" id="qNum">${nf(start)}</span>
       <p style="margin-top:4px"><b>men ahead of you</b></p>
@@ -790,7 +788,7 @@ function screenQueue(payload) {
 
     <div class="card">
       <div class="reel-head">
-        <h2>📱 Live from the queue</h2>
+        <h2>Live from the queue</h2>
         <span class="badge">#SuitorTok</span>
       </div>
       <p class="muted">Other applicants. Do not be like them.</p>
@@ -816,9 +814,9 @@ function screenQueue(payload) {
     cancelAnimationFrame(raf);
     numEl.textContent = '1';
     barEl.style.width = '100%';
-    lineEl.innerHTML = `<b>🎺 IT IS YOUR TURN, BRAVE ONE.</b>`;
+    lineEl.innerHTML = `<b>IT IS YOUR TURN, BRAVE ONE.</b>`;
     $('#qActions', root).innerHTML =
-      `<button type="button" class="btn pink big wiggle" id="qGo">🚪 Enter the throne room</button>`;
+      `<button type="button" class="btn pink big wiggle" id="qGo">Enter the throne room</button>`;
     $('#qGo', root).addEventListener('click', () => {
       go(payload ? '/quiz/' + payload : '/quiz');
     });
@@ -843,10 +841,10 @@ function screenQueue(payload) {
     if (done || skipped) return;
     const acts = $('#qActions', root);
     if (!acts) return;
-    acts.innerHTML = `<button type="button" class="btn sun" id="qSkip">💰 Bribe the guards (500 kisses)</button>`;
+    acts.innerHTML = `<button type="button" class="btn sun" id="qSkip">Bribe the guards (500 kisses)</button>`;
     $('#qSkip', root).addEventListener('click', () => {
       skipped = true;
-      toast('💋 500 kisses accepted. The guards are blushing.');
+      toast('500 kisses accepted. The guards are blushing.');
       setTimeout(finish, 700);
     });
   }, 2200);
@@ -860,9 +858,9 @@ function screenQueue(payload) {
 function screenQuiz(payload) {
   let step = 0, score = 0;
   const root = render(`
-    <div class="card sun tilt-r center">
+    <div class="card sun center">
       <span class="badge">SECURITY CHECKPOINT</span>
-      <h1 style="font-size:clamp(22px,6vw,36px)">🧠 The Vibe Check</h1>
+      <h1 style="font-size:clamp(22px,6vw,36px)">The Vibe Check</h1>
       <p class="muted">Four questions stand between you and the calendar. The guards are watching. So is she.</p>
     </div>
     <div class="card" id="quizCard"></div>
@@ -884,7 +882,7 @@ function screenQuiz(payload) {
     const opt = QUIZ[step].opts[Number(btn.dataset.opt)];
     btn.classList.add('picked');
     score += opt.s;
-    toast(`${opt.s >= 20 ? '✅' : opt.s > 0 ? '😬' : '💀'} ${esc(opt.r)}`, 2000);
+    toast(esc(opt.r), 2000);
     setTimeout(() => {
       step++;
       if (step < QUIZ.length) drawQ();
@@ -902,11 +900,11 @@ function screenQuiz(payload) {
     store.set('score', pct);
     $('#quizCard', root).innerHTML = `
       <div class="center">
-        <h2>📊 Results are in</h2>
+        <h2>Results are in</h2>
         <span class="queue-num" style="color:#5fe3c0">${pct}%</span>
         <p><b>${esc(verdict)}</b></p>
         <p class="muted">You beat ${nf(3000 + pct * 27)} other applicants. They are crying. You are not.</p>
-        <button type="button" class="btn mint big wiggle" id="toCal">🗓️ Open the royal calendar</button>
+        <button type="button" class="btn mint big wiggle" id="toCal">Open the royal calendar</button>
       </div>`;
     confetti(50);
     $('#toCal', root).addEventListener('click', () => go(payload ? '/pick/' + payload : '/pick'));
@@ -929,27 +927,27 @@ function screenPick(payload) {
   const pick = { day: null, slot: null, plan: null };
 
   const root = render(`
-    <div class="card blush tilt-l">
+    <div class="card blush">
       <span class="badge">APPLICATION FORM 7B</span>
-      <h1 style="font-size:clamp(22px,6vw,36px)">🗓️ Choose your moment</h1>
+      <h1 style="font-size:clamp(22px,6vw,36px)">Choose your moment</h1>
       <p>Her Majesty <b>${esc(her)}</b> has unlocked <b>${openDays.length}</b> day${openDays.length > 1 ? 's' : ''}.
       Everything else is guarded by men with very large hats.</p>
-      ${decree.m ? `<div class="speech mt">💬 “${esc(decree.m)}”<br><span class="muted">— ${esc(her)}</span></div>` : ''}
+      ${decree.m ? `<div class="speech mt">“${esc(decree.m)}”<br><span class="muted">— ${esc(her)}</span></div>` : ''}
     </div>
 
     <div class="card">
-      <h2>👑 The royal calendar</h2>
+      <h2>The royal calendar</h2>
       <p class="muted">Green days are yours for the taking. Grey days will insult you if tapped.</p>
       <div id="calMount"></div>
     </div>
 
     <div class="card sun" id="slotCard" style="display:none">
-      <h2>⏰ Pick your slot</h2>
+      <h2>Pick your slot</h2>
       <div class="chips" id="slotChips"></div>
     </div>
 
     <div class="card mint" id="planCard" style="display:none">
-      <h2>🎯 What's the plan, genius?</h2>
+      <h2>What's the plan, genius?</h2>
       <div class="chips" id="planChips"></div>
       <label class="fld mt"><span>Your name (as it will appear on the certificate)</span>
         <input type="text" id="sName" maxlength="24" placeholder="e.g. Alexander the Hopeful" value="${esc(store.get('suitorName', ''))}" />
@@ -957,11 +955,11 @@ function screenPick(payload) {
       <label class="fld"><span>Your grovel (optional but strongly advised)</span>
         <textarea id="sVow" maxlength="240" placeholder="I promise snacks, punctuality, and at least three (3) compliments."></textarea>
       </label>
-      <button type="button" class="btn pink big wide wiggle" id="submitBtn">💍 Submit my application</button>
+      <button type="button" class="btn pink big wide wiggle" id="submitBtn">Submit my application</button>
     </div>
 
-    ${decree.r && decree.r.length ? `<div class="card cream tilt-r">
-      <h2>📜 Terms you are agreeing to</h2>
+    ${decree.r && decree.r.length ? `<div class="card cream">
+      <h2>Terms you are agreeing to</h2>
       <ul class="rules-list">${decree.r.map((i) => `<li>${esc(RULES[i] || '')}</li>`).join('')}</ul>
     </div>` : ''}
 
@@ -1023,8 +1021,8 @@ function screenPick(payload) {
   });
 
   $('#submitBtn', root).addEventListener('click', () => {
-    if (pick.day == null || pick.slot == null) { toast('🤨 Pick a day and a slot first, hero.'); return; }
-    if (pick.plan == null) { toast('🎯 Choose a plan. "We\'ll see" is not a plan.'); return; }
+    if (pick.day == null || pick.slot == null) { toast('Pick a day and a slot first, hero.'); return; }
+    if (pick.plan == null) { toast('Choose a plan. "We\'ll see" is not a plan.'); return; }
     const name = ($('#sName', root).value || '').trim() || 'A Nameless Hopeful';
     store.set('suitorName', name);
     const booking = {
@@ -1045,12 +1043,12 @@ function screenPick(payload) {
 }
 
 const DENIALS = [
-  '🛡️ The guards say NO. Loudly.',
-  '👑 That day belongs to her and her alone.',
-  '🚫 Denied by royal decree. Try harder.',
-  '😴 She is busy being unavailable that day.',
-  '📵 That day is reserved for ignoring you.',
-  '🐉 There is a dragon on that day. Sorry.'
+  'The guards say NO. Loudly.',
+  'That day belongs to her and her alone.',
+  'Denied by royal decree. Try harder.',
+  'She is busy being unavailable that day.',
+  'That day is reserved for ignoring you.',
+  'There is a dragon on that day. Sorry.'
 ];
 
 /* ---------------------------------------------------------
@@ -1069,7 +1067,7 @@ function screenBooked(payload) {
     <div class="cert">
       ${svgSeal()}
       <span class="badge">OFFICIAL · IRREVERSIBLE · LEGALLY NONSENSE</span>
-      <h2>🎉 DATE SECURED 🎉</h2>
+      <h2>DATE SECURED</h2>
       <p>Against overwhelming competition, <b>${esc(b.s)}</b> has been granted an audience with
       <b>${esc(b.n || 'The Princess')}</b>.</p>
       <dl>
@@ -1080,27 +1078,27 @@ function screenBooked(payload) {
         <div><dt>SUITORS DEFEATED</dt><dd>${nf(kingdomStats().inQueue)}</dd></div>
         <div><dt>CONFIRMATION CODE</dt><dd>${esc(code)}</dd></div>
       </dl>
-      ${b.w ? `<div class="speech" style="text-align:left">💬 “${esc(b.w)}”<br><span class="muted">— ${esc(b.s)}, under oath</span></div>` : ''}
+      ${b.w ? `<div class="speech" style="text-align:left">“${esc(b.w)}”<br><span class="muted">— ${esc(b.s)}, under oath</span></div>` : ''}
     </div>
 
-    ${b.r && b.r.length ? `<div class="card cream tilt-l mt">
-      <h2>📜 Binding terms</h2>
+    ${b.r && b.r.length ? `<div class="card cream mt">
+      <h2>Binding terms</h2>
       <ul class="rules-list">${b.r.map((i) => `<li>${esc(RULES[i] || '')}</li>`).join('')}</ul>
       <p class="muted mt">Breach of terms results in immediate dessert forfeiture.</p>
     </div>` : ''}
 
     <div class="card center">
-      <h2>📤 Send this back to her</h2>
-      <p class="muted">This link <em>is</em> the booking. No servers involved — just vibes and base64.</p>
+      <h2>Send this back to her</h2>
+      <p class="muted">This link <em>is</em> the booking. Nothing is stored anywhere — send it and it counts.</p>
       ${shareRow(url, 'bookedUrl')}
       <div class="btn-row center mt">
-        <button type="button" class="btn sun" id="againBtn">🎊 More confetti</button>
-        <button type="button" class="btn ghost" data-home>🏰 Back to the kingdom</button>
+        <button type="button" class="btn sun" id="againBtn">More confetti</button>
+        <button type="button" class="btn ghost" data-home>Back to the kingdom</button>
       </div>
     </div>
 
-    <div class="card blush tilt-r">
-      <div class="reel-head"><h2>💔 Meanwhile, the rejected</h2><span class="badge">LIVE</span></div>
+    <div class="card blush">
+      <div class="reel-head"><h2>Meanwhile, the rejected</h2><span class="badge">LIVE</span></div>
       <p class="muted">They queued. They failed. You did not.</p>
       <div class="reel-wrap" id="reel"></div>
     </div>`);
@@ -1108,7 +1106,7 @@ function screenBooked(payload) {
   confetti(150);
   onCleanup(mountReel($('#reel', root), { duration: 3600, startAt: 5 }));
   bindCopy(root);
-  $('#againBtn', root).addEventListener('click', () => { confetti(120); toast('🎉 The kingdom celebrates again.'); });
+  $('#againBtn', root).addEventListener('click', () => { confetti(120); toast('The kingdom celebrates again.'); });
   $$('[data-home]', root).forEach((btn) => btn.addEventListener('click', () => go('/')));
 }
 
@@ -1117,13 +1115,13 @@ function screenBooked(payload) {
    --------------------------------------------------------- */
 function screenNoDecree() {
   const root = render(`
-    <div class="card cream center tilt-l">
-      <h1 style="font-size:clamp(22px,6vw,36px)">🔒 No decree found</h1>
+    <div class="card cream center">
+      <h1 style="font-size:clamp(22px,6vw,36px)">No decree found</h1>
       <p>The royal calendar hasn't been opened yet, or your link lost its magic on the way here.</p>
       <p class="muted">Ask her nicely for a fresh <b>Royal Decree link</b>. Nicely. With snacks.</p>
       <div class="btn-row center mt">
-        <button type="button" class="btn pink" data-goto="/princess">👑 I am the Princess</button>
-        <button type="button" class="btn ghost" data-goto="/">🏰 Back to the gates</button>
+        <button type="button" class="btn pink" data-goto="/princess">I am the Princess</button>
+        <button type="button" class="btn ghost" data-goto="/">Back to the gates</button>
       </div>
     </div>`);
   $$('[data-goto]', root).forEach((b) => b.addEventListener('click', () => go(b.dataset.goto)));
@@ -1131,10 +1129,10 @@ function screenNoDecree() {
 
 function screenBroken() {
   const root = render(`
-    <div class="card center tilt-r">
-      <h1 style="font-size:clamp(22px,6vw,36px)">🐉 This link is cursed</h1>
+    <div class="card center">
+      <h1 style="font-size:clamp(22px,6vw,36px)">This link is cursed</h1>
       <p>A dragon ate part of it. Ask for the full link again — they break if copied halfway.</p>
-      <button type="button" class="btn pink mt" data-goto="/">🏰 Back to the gates</button>
+      <button type="button" class="btn pink mt" data-goto="/">Back to the gates</button>
     </div>`);
   $$('[data-goto]', root).forEach((b) => b.addEventListener('click', () => go(b.dataset.goto)));
 }
@@ -1149,7 +1147,7 @@ function route() {
     case '':          return screenHome();
     case 'princess':  return screenPrincess();
     case 'queue':     return screenQueue(payload);
-    case 'book':      return screenQueue(payload);      // decree link lands in the queue first 😈
+    case 'book':      return screenQueue(payload);      // decree link lands in the queue first
     case 'quiz':      return screenQuiz(payload);
     case 'pick':      return screenPick(payload);
     case 'booked':    return screenBooked(payload);
