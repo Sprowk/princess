@@ -543,7 +543,7 @@ function screenHome() {
         <li><b>He</b> queues, suffers, books a slot → gets a <b>Receipt link</b>.</li>
         <li><b>He</b> sends it back. Date confirmed. Kingdom rejoices.</li>
       </ol>
-      <p class="muted">No servers, no accounts, no sign-ups. The whole date lives inside the link.</p>
+      <p class="muted">No sign-ups, no apps, no fuss. The whole date travels inside the link.</p>
     </div>`);
 
   $$('[data-goto]', root).forEach((b) => b.addEventListener('click', () => go(b.dataset.goto)));
@@ -567,7 +567,7 @@ function screenPrincess() {
 
   const root = render(`
     <div class="card blush">
-      <span class="badge">STEP 1 · IDENTIFY YOURSELF</span>
+      <span class="step"><i>1</i>Identify yourself</span>
       <h1 style="font-size:clamp(24px,6.5vw,40px)">Princess Mode</h1>
       <p>Welcome, Your Majesty. Tap the days you would <em>consider</em> tolerating his presence.
       Everything else stays locked behind the royal guards.</p>
@@ -577,7 +577,7 @@ function screenPrincess() {
     </div>
 
     <div class="card">
-      <span class="badge">STEP 2 · THE ROYAL CALENDAR</span>
+      <span class="step"><i>2</i>The royal calendar</span>
       <h2>Which days are worthy?</h2>
       <p class="muted">Tap a day to open it. Tap again to slam it shut. Past days are already dead to us.</p>
       <div id="calMount"></div>
@@ -588,14 +588,14 @@ function screenPrincess() {
     </div>
 
     <div class="card sun">
-      <span class="badge">STEP 3 · TIME SLOTS</span>
+      <span class="step"><i>3</i>Time slots</span>
       <h2>When, exactly?</h2>
       <p class="muted">Each open day gets its own slots. He may only choose from these. Cruelty is encouraged.</p>
       <div id="slotList"></div>
     </div>
 
     <div class="card mint">
-      <span class="badge">STEP 4 · YOUR DEMANDS</span>
+      <span class="step"><i>4</i>Your demands</span>
       <h2>Non-negotiable terms</h2>
       <div class="chips" id="ruleChips">
         ${RULES.map((r, i) => `<button type="button" class="chip ${decree.r.includes(i) ? 'on' : ''}" data-rule="${i}">${esc(r)}</button>`).join('')}
@@ -606,7 +606,7 @@ function screenPrincess() {
     </div>
 
     <div class="card cream center">
-      <span class="badge">STEP 5 · ISSUE THE DECREE</span>
+      <span class="step"><i>5</i>Issue the decree</span>
       <h2>Send him the link</h2>
       <p class="muted">This generates a link containing your availability. Send it to him. Then wait, powerfully.</p>
       <button type="button" class="btn pink big wiggle" id="makeLink">Issue the Royal Decree</button>
@@ -1066,7 +1066,7 @@ function screenBooked(payload) {
   const root = render(`
     <div class="cert">
       ${svgSeal()}
-      <span class="badge">OFFICIAL · IRREVERSIBLE · LEGALLY NONSENSE</span>
+      <span class="badge">OFFICIAL · LEGALLY NONSENSE</span>
       <h2>DATE SECURED</h2>
       <p>Against overwhelming competition, <b>${esc(b.s)}</b> has been granted an audience with
       <b>${esc(b.n || 'The Princess')}</b>.</p>
@@ -1089,7 +1089,7 @@ function screenBooked(payload) {
 
     <div class="card center">
       <h2>Send this back to her</h2>
-      <p class="muted">This link <em>is</em> the booking. Nothing is stored anywhere — send it and it counts.</p>
+      <p class="muted">This link <em>is</em> the booking. Send it to her and it counts as official.</p>
       ${shareRow(url, 'bookedUrl')}
       <div class="btn-row center mt">
         <button type="button" class="btn sun" id="againBtn">More confetti</button>
