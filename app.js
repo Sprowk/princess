@@ -781,7 +781,7 @@ function screenQueue(payload) {
       <h1 style="font-size:clamp(22px,6vw,38px)">You are in the queue</h1>
       <p class="muted">Applications for <b>${esc(her)}</b> are currently... competitive.</p>
       <span class="queue-num" id="qNum">${nf(start)}</span>
-      <p style="margin-top:4px"><b>men ahead of you</b></p>
+      <p style="margin-top:4px"><b id="qCap">men ahead of you</b></p>
       <div class="queue-bar"><i id="qBar"></i></div>
       <p id="qLine" style="min-height:3em">${esc(QUEUE_LINES[0])}</p>
       <div id="qActions" class="btn-row center"></div>
@@ -804,7 +804,7 @@ function screenQueue(payload) {
   onCleanup(liveStats(root));
 
   /* animated countdown */
-  const numEl = $('#qNum', root), barEl = $('#qBar', root), lineEl = $('#qLine', root);
+  const numEl = $('#qNum', root), barEl = $('#qBar', root), lineEl = $('#qLine', root), capEl = $('#qCap', root);
   const DUR = 9000;
   const t0 = performance.now();
   let done = false, raf = 0, skipped = false;
@@ -813,7 +813,8 @@ function screenQueue(payload) {
     if (done) return;
     done = true;
     cancelAnimationFrame(raf);
-    numEl.textContent = '1';
+    numEl.textContent = '0';
+    capEl.textContent = 'men ahead of you. The queue is empty.';
     barEl.style.width = '100%';
     lineEl.innerHTML = `<b>IT IS YOUR TURN, BRAVE ONE.</b>`;
     $('#qActions', root).innerHTML =
@@ -827,8 +828,9 @@ function screenQueue(payload) {
   function tick(now) {
     const p = Math.min(1, (now - t0) / DUR);
     const eased = 1 - Math.pow(1 - p, 3);
-    const left = Math.max(1, Math.round(start - (start - 1) * eased));
+    const left = Math.max(0, Math.round(start - start * eased));
     numEl.textContent = nf(left);
+    capEl.textContent = left === 1 ? 'man ahead of you' : 'men ahead of you';
     barEl.style.width = (eased * 100).toFixed(1) + '%';
     const li = Math.min(QUEUE_LINES.length - 1, Math.floor(p * QUEUE_LINES.length));
     if (lineEl.textContent !== QUEUE_LINES[li]) lineEl.textContent = QUEUE_LINES[li];
