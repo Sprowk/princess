@@ -528,10 +528,11 @@ function screenHome() {
         <p>Open the royal calendar, decide which days are worthy, set your demands, then hand out a link. Absolute power. Zero effort.</p>
       </button>
 
-      <button type="button" class="mode suitor" data-goto="${saved ? '/book/' + packState(saved) : '/queue'}">
+      <button type="button" class="mode suitor" data-goto="${saved ? '/book/' + packState(saved) : '/suitor'}">
         <svg class="mode-avatar" viewBox="0 0 100 118" aria-hidden="true">${svgFace(4).replace('<svg class="reel-face" viewBox="0 0 100 118" role="img" aria-label="A hopeful cartoon suitor">', '').replace('</svg>', '')}</svg>
         <h3>Suitor Mode</h3>
-        <p>Join the queue behind several thousand desperate men, pass the vibe check, and beg for a slot. Good luck, champ.</p>
+        <p>Join the queue behind several thousand desperate men, pass the vibe check, and beg for a slot.
+        You'll need the link she sends you.</p>
       </button>
     </div>
 
@@ -1111,19 +1112,86 @@ function screenBooked(payload) {
 }
 
 /* ---------------------------------------------------------
-   15. fallback screens
+   15. arriving without a decree (he opened the site directly)
    --------------------------------------------------------- */
+function demoDecree() {
+  const t = startOfToday();
+  const day = (n) => { const d = new Date(t); d.setDate(d.getDate() + n); return ymd(d); };
+  return {
+    v: 1,
+    n: 'The Demo Princess',
+    d: { [day(2)]: [2, 3], [day(3)]: [1, 2], [day(6)]: [3, 4], [day(9)]: [0, 3] },
+    r: [0, 2, 5],
+    m: 'This is only a tour, but the snack rule still applies.'
+  };
+}
+
+/* accepts a whole link or a bare payload, and refuses anything that isn't a decree */
+function extractPayload(raw) {
+  const s = (raw || '').trim();
+  if (!s) return null;
+  const m = s.match(/#\/(?:book|pick|queue)\/([A-Za-z0-9_-]+)/);
+  const candidate = m ? m[1] : s.replace(/^#?\/?/, '');
+  const parsed = unpackState(candidate);
+  return (parsed && parsed.d && Object.keys(parsed.d).length) ? candidate : null;
+}
+
+function linkIntakeMarkup() {
+  return `
+    <h2>Paste her link</h2>
+    <p class="muted">She sends it from Princess Mode — it looks like <b>…/#/book/eyJ2…</b></p>
+    <div class="share-box">
+      <input type="text" id="intakeUrl" placeholder="paste the link she sent you…" />
+      <button type="button" class="btn pink" id="intakeGo">Join the queue</button>
+    </div>
+    <div class="hr"></div>
+    <h3>Just having a look?</h3>
+    <p class="muted">Take the whole tour with a demo princess — queue, vibe check, calendar, certificate.</p>
+    <button type="button" class="btn mint" id="demoGo">Take the tour</button>`;
+}
+
+function bindLinkIntake(root) {
+  const enter = () => {
+    const payload = extractPayload($('#intakeUrl', root).value);
+    if (!payload) { toast('That is not a royal decree link. Ask her to send the whole thing.'); return; }
+    go('/book/' + payload);
+  };
+  $('#intakeGo', root).addEventListener('click', enter);
+  $('#intakeUrl', root).addEventListener('keydown', (e) => { if (e.key === 'Enter') enter(); });
+  $('#demoGo', root).addEventListener('click', () => go('/book/' + packState(demoDecree())));
+}
+
+function screenNeedLink() {
+  const root = render(`
+    <div class="card blush">
+      <span class="step"><i>!</i>Halt, suitor</span>
+      <h1 style="font-size:clamp(22px,6vw,38px)">You need her link first</h1>
+      <p>The Princess decides which days exist. Until she opens her calendar and sends you the link,
+      there is genuinely nothing to book — the guards are just watching you stand there.</p>
+      <div class="speech">Tell her to open <b>Princess Mode</b>, tap her free days, and press
+      <b>Issue the Royal Decree</b>. Whatever she sends back goes in the box below.</div>
+    </div>
+    <div class="card">${linkIntakeMarkup()}</div>
+    <div class="center mt">
+      <button type="button" class="btn ghost" data-goto="/">← back to the gates</button>
+    </div>`);
+  bindLinkIntake(root);
+  $$('[data-goto]', root).forEach((b) => b.addEventListener('click', () => go(b.dataset.goto)));
+}
+
 function screenNoDecree() {
   const root = render(`
     <div class="card cream center">
       <h1 style="font-size:clamp(22px,6vw,36px)">No decree found</h1>
       <p>The royal calendar hasn't been opened yet, or your link lost its magic on the way here.</p>
-      <p class="muted">Ask her nicely for a fresh <b>Royal Decree link</b>. Nicely. With snacks.</p>
+      <p class="muted">Links break when they get copied halfway. Ask her for the whole thing.</p>
       <div class="btn-row center mt">
         <button type="button" class="btn pink" data-goto="/princess">I am the Princess</button>
         <button type="button" class="btn ghost" data-goto="/">Back to the gates</button>
       </div>
-    </div>`);
+    </div>
+    <div class="card">${linkIntakeMarkup()}</div>`);
+  bindLinkIntake(root);
   $$('[data-goto]', root).forEach((b) => b.addEventListener('click', () => go(b.dataset.goto)));
 }
 
@@ -1146,8 +1214,9 @@ function route() {
   switch (head) {
     case '':          return screenHome();
     case 'princess':  return screenPrincess();
-    case 'queue':     return screenQueue(payload);
-    case 'book':      return screenQueue(payload);      // decree link lands in the queue first
+    case 'suitor':    return screenNeedLink();
+    case 'queue':     return payload ? screenQueue(payload) : screenNeedLink();
+    case 'book':      return payload ? screenQueue(payload) : screenNeedLink();  // her link lands in the queue first
     case 'quiz':      return screenQuiz(payload);
     case 'pick':      return screenPick(payload);
     case 'booked':    return screenBooked(payload);
