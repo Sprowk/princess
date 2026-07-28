@@ -395,7 +395,10 @@ input:focus,textarea:focus,select:focus{outline:4px dashed var(--lilac);outline-
   background:#fff;border:3px solid var(--ink);border-radius:14px;padding:9px 12px;font-size:14px;
   display:flex;gap:9px;align-items:center;
 }
-.rules-list li::before{content:"📜";font-size:16px}
+.rules-list li::before{
+  content:"";width:13px;height:13px;flex:none;border-radius:50%;
+  background:var(--hot);border:3px solid var(--ink);
+}
 
 /* ---------- toasts ---------- */
 .toasts{
@@ -451,6 +454,7 @@ input:focus,textarea:focus,select:focus{outline:4px dashed var(--lilac);outline-
 .speech{
   position:relative;background:var(--sun);border:var(--line) solid var(--ink);border-radius:18px;
   padding:14px 16px;box-shadow:var(--pop-sm);font-weight:700;
+  margin-bottom:28px;   /* clears the pointer tail so it never sits on the next element */
 }
 .speech::after{
   content:"";position:absolute;left:28px;bottom:-16px;width:0;height:0;

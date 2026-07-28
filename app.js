@@ -151,14 +151,14 @@ const SLOTS = [
 ];
 
 const PLANS = [
-  { e: '🍕', t: 'Pizza & a terrible movie' },
-  { e: '🍣', t: 'Sushi (my treat, obviously)' },
-  { e: '🎡', t: 'Overpriced funfair' },
-  { e: '🧺', t: 'Picnic, ants included' },
-  { e: '🎬', t: 'Cinema + smuggled snacks' },
-  { e: '🎮', t: 'Co-op game night' },
-  { e: '🥾', t: 'A walk I will complain about' },
-  { e: '💆', t: 'Spa day, I carry the bags' }
+  { t: 'Pizza & a terrible movie' },
+  { t: 'Sushi (my treat, obviously)' },
+  { t: 'Overpriced funfair' },
+  { t: 'Picnic, ants included' },
+  { t: 'Cinema + smuggled snacks' },
+  { t: 'Co-op game night' },
+  { t: 'A walk I will complain about' },
+  { t: 'Spa day, I carry the bags' }
 ];
 
 const RULES = [
@@ -736,7 +736,6 @@ function screenPrincess() {
       ${shareRow(url, 'decreeUrl')}
       <div class="btn-row center mt">
         <a class="btn sky" href="${esc(url)}" target="_blank" rel="noopener">Preview his side</a>
-        <a class="btn mint" href="${esc('sms:?&body=' + encodeURIComponent('Your application portal is open, peasant: ' + url))}">Text it</a>
       </div>`;
     bindCopy(out);
     confetti(60);
@@ -1015,7 +1014,7 @@ function screenPick(payload) {
   });
 
   $('#planChips', root).innerHTML = PLANS
-    .map((p, i) => `<button type="button" class="chip" data-p="${i}">${p.e} ${esc(p.t)}</button>`).join('');
+    .map((p, i) => `<button type="button" class="chip" data-p="${i}">${esc(p.t)}</button>`).join('');
   $('#planChips', root).addEventListener('click', (e) => {
     const c = e.target.closest('[data-p]');
     if (!c) return;
@@ -1076,7 +1075,7 @@ function screenBooked(payload) {
       <dl>
         <div><dt>DATE</dt><dd>${esc(prettyDate(b.d))}</dd></div>
         <div><dt>TIME</dt><dd>${esc(slot.label)} · ${slot.t}</dd></div>
-        <div><dt>THE PLAN</dt><dd>${plan.e} ${esc(plan.t)}</dd></div>
+        <div><dt>THE PLAN</dt><dd>${esc(plan.t)}</dd></div>
         <div><dt>VIBE SCORE</dt><dd>${Number(b.q) || 88}% approved</dd></div>
         <div><dt>SUITORS DEFEATED</dt><dd>${nf(kingdomStats().inQueue)}</dd></div>
         <div><dt>CONFIRMATION CODE</dt><dd>${esc(code)}</dd></div>
